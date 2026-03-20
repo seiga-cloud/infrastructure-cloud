@@ -1,4 +1,4 @@
-## 5. dmesg command
+## command
 
 ### Overview
 `dmesg` displays kernel ring buffer messages.  
