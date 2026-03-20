@@ -33,7 +33,7 @@ Shows only error-related messages.
 | Option | Description |
 |--------|------------|
 | -T | Show human-readable timestamps |
-| -l | Filter by log level (err, warn, info) |
+| -l | Filter by log level (error, warn, info) |
 | -w | Follow new messages in real time |
 
 ### Use Cases
