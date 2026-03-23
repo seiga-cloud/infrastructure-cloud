@@ -83,9 +83,87 @@ whether the issue is hardware-related or driver-related.
 ## Summary
 
 `lsusb` is a fundamental tool for managing and troubleshooting USB devices in Linux environments.
-## dmesg command
+
+
+# lsmod command
+
+## Overview
+`lsmod` displays the status of currently loaded Linux kernel modules.  
+It helps identify which drivers are active in the system.
+
+## Syntax
+lsmod
+
+## Examples
+
+### Basic usage
+$ lsmod
+
+Displays a list of loaded kernel modules along with their usage count and dependencies.
+
+## Output Explanation
+
+- Module: Name of the kernel module  
+- Size: Memory used by the module  
+- Used by: Number of dependent modules
+
+## Use Cases
+
+- Check which drivers are currently loaded
+- Identify unused or unnecessary modules
+- Investigate dependency relationships between modules
+- Troubleshoot driver-related issues
+
+## Practical Insight
+
+A module with a usage count of 0 may be safe to remove,  
+but dependencies must be checked before unloading.
+
+## Summary
+
+`lsmod` is a key command for understanding the current state of kernel modules and system drivers.
+
+# modprobe command
+
+## Overview
+`modprobe` is used to load or unload Linux kernel modules.  
+It automatically resolves dependencies, making it more reliable than low-level tools like `insmod`.
+
+## Syntax
+modprobe [OPTION] <module_name>
+
+## Examples
+
+### Load a module
+$ modprobe <module_name>
+
+### Remove a module
+$ modprobe -r <module_name>
+
+## Options
+| Option | Description |
+|--------|------------|
+| -r | Remove (unload) a module |
+| -n | Show what would be done without executing |
+
+## Use Cases
+
+- Manually load device drivers
+- Remove problematic modules
+- Reload modules during troubleshooting
+- Apply configuration changes
+
+## Practical Insight
+
+Unlike `insmod`, `modprobe` handles module dependencies automatically.  
+This makes it the preferred tool for safely managing kernel modules.
+
+## Summary
+
+`modprobe` is essential for controlling kernel modules and ensuring proper driver operation in Linux systems.
 
 ### Overview
+## dmesg command
 `dmesg` displays kernel ring buffer messages.  
 It provides information about system boot, hardware detection, and driver initialization.
 
@@ -181,79 +259,3 @@ Using both commands allows more comprehensive troubleshooting.
 
 This workflow enables efficient identification and resolution  
 of hardware and driver-related issues.
-# lsmod command
-
-## Overview
-`lsmod` displays the status of currently loaded Linux kernel modules.  
-It helps identify which drivers are active in the system.
-
-## Syntax
-lsmod
-
-## Examples
-
-### Basic usage
-$ lsmod
-
-Displays a list of loaded kernel modules along with their usage count and dependencies.
-
-## Output Explanation
-
-- Module: Name of the kernel module  
-- Size: Memory used by the module  
-- Used by: Number of dependent modules
-
-## Use Cases
-
-- Check which drivers are currently loaded
-- Identify unused or unnecessary modules
-- Investigate dependency relationships between modules
-- Troubleshoot driver-related issues
-
-## Practical Insight
-
-A module with a usage count of 0 may be safe to remove,  
-but dependencies must be checked before unloading.
-
-## Summary
-
-`lsmod` is a key command for understanding the current state of kernel modules and system drivers.
-
-# modprobe command
-
-## Overview
-`modprobe` is used to load or unload Linux kernel modules.  
-It automatically resolves dependencies, making it more reliable than low-level tools like `insmod`.
-
-## Syntax
-modprobe [OPTION] <module_name>
-
-## Examples
-
-### Load a module
-$ modprobe <module_name>
-
-### Remove a module
-$ modprobe -r <module_name>
-
-## Options
-| Option | Description |
-|--------|------------|
-| -r | Remove (unload) a module |
-| -n | Show what would be done without executing |
-
-## Use Cases
-
-- Manually load device drivers
-- Remove problematic modules
-- Reload modules during troubleshooting
-- Apply configuration changes
-
-## Practical Insight
-
-Unlike `insmod`, `modprobe` handles module dependencies automatically.  
-This makes it the preferred tool for safely managing kernel modules.
-
-## Summary
-
-`modprobe` is essential for controlling kernel modules and ensuring proper driver operation in Linux systems.
