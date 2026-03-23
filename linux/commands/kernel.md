@@ -41,6 +41,7 @@ If a device is listed but no driver is in use, manual driver loading may be requ
 
 `lspci` is essential for inspecting PCI hardware and diagnosing driver-related issues in Linux systems.
 
+
 # lsusb command
 
 ## Overview
