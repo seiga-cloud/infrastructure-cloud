@@ -1,6 +1,7 @@
 # System Analysis Commands
 
-This document covers commands used for analyzing binaries and system behavior in Linux.
+This document summarizes commands used for analyzing binary dependencies  
+and troubleshooting runtime issues in Linux environments.
 
 ---
 
@@ -8,55 +9,124 @@ This document covers commands used for analyzing binaries and system behavior in
 
 ### Overview
 `ldd` displays the shared library dependencies of a binary executable.  
-It helps identify which libraries are required for a program to run.
+It is commonly used when a program fails to start due to missing libraries.
 
 ### Syntax
 ldd <file>
 
 ### Examples
 
-#### Check dependencies of a binary
+#### Check system binary
 $ ldd /bin/ls
 
-Displays all shared libraries required by the `ls` command.
-
-#### Check custom program
+#### Check custom application
 $ ldd ./myapp
 
-Shows required libraries for a compiled application.
-
-### Output Explanation
-
-- library name → required shared library  
-- => path → actual file location  
-- (0x...) → memory address (for reference)
+#### Example output (missing library)
+libexample.so => not found
 
 ### Use Cases
 
-- Identify missing libraries
-- Debug application startup failures
-- Verify runtime dependencies
-- Analyze compiled binaries
+- Debug "No such file or directory" or execution errors
+- Identify missing shared libraries
+- Verify runtime dependencies after deployment
 
 ### Practical Insight
 
-If a required library is missing, `ldd` will display "not found".  
-This is a common cause of application execution errors.
+In real environments, `ldd` is often used when a binary exists but does not run.
 
-Example:
+Example scenario:
 
-libexample.so => not found
+$ ./app  
+→ error while loading shared libraries
 
-This indicates that the required library is not installed or not in the library path.
+Then:
+
+$ ldd ./app  
+→ shows "not found"
+
+This helps quickly identify missing dependencies.
 
 ### Important Notes
 
-- Use caution when running `ldd` on untrusted binaries  
-- It may execute code depending on the system configuration
+- Avoid running `ldd` on untrusted binaries
+- It may execute code depending on system configuration
 
-### Summary
+---
 
-`ldd` is an essential tool for analyzing binary dependencies  
-and troubleshooting runtime issues in Linux systems.
+## 2. ldconfig command
 
-Related: `ldconfig` is used to update shared library cache.
+### Overview
+`ldconfig` updates the shared library cache used by the dynamic linker.  
+It ensures that newly installed libraries are recognized by the system.
+
+### Syntax
+ldconfig [OPTION]
+
+### Examples
+
+#### Update library cache
+$ sudo ldconfig
+
+#### Show registered libraries
+$ ldconfig -p | grep libssl
+
+### Use Cases
+
+- Register manually installed libraries
+- Fix runtime errors after library installation
+- Verify available shared libraries
+
+### Practical Insight
+
+A common issue occurs when a library is installed but not recognized:
+
+1. Place library in `/usr/local/lib`
+2. Run application → fails
+3. Run:
+   $ sudo ldconfig
+4. Retry → works
+
+This happens because the cache was not updated.
+
+---
+
+## Workflow (Dependency Troubleshooting)
+
+### Real-world debugging flow
+
+1. Run application  
+   → execution error occurs  
+
+2. Check dependencies  
+   → `ldd ./app`  
+
+3. Identify missing libraries  
+   → "not found"  
+
+4. Install or place required library  
+
+5. Update cache  
+   → `sudo ldconfig`  
+
+6. Re-run application  
+
+---
+
+## Related Configuration
+
+- `/etc/ld.so.conf`
+- `/etc/ld.so.conf.d/`
+- `LD_LIBRARY_PATH`
+
+These define where the system searches for shared libraries.
+
+---
+
+## Summary
+
+`ldd` and `ldconfig` are essential tools for diagnosing and resolving  
+runtime dependency issues.
+
+They are frequently used in real-world environments when applications fail  
+to start due to missing or misconfigured libraries.
