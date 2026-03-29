@@ -282,6 +282,167 @@ This is useful in controlled environments where unnecessary packages should be a
 ---
 
 ## Summary
+## 5. rpm command
+
+### Overview
+`rpm` is a low-level package management tool used in RPM-based distributions  
+such as Red Hat, CentOS, and Fedora.
+
+It allows installation, removal, and inspection of `.rpm` packages.
+
+### Syntax
+rpm [OPTION] <package>
+
+---
+
+### Examples
+
+#### Install a package
+$ sudo rpm -ivh package.rpm
+
+#### Upgrade a package
+$ sudo rpm -Uvh package.rpm
+
+#### Remove a package
+$ sudo rpm -e package_name
+
+#### Query installed packages
+$ rpm -qa
+
+#### Check package information
+$ rpm -qi package_name
+
+#### List files in a package
+$ rpm -ql package_name
+
+---
+
+### Options
+| Option | Description |
+|--------|------------|
+| -i | Install package |
+| -U | Upgrade package |
+| -e | Erase package |
+| -q | Query package |
+| -v | Verbose |
+| -h | Show progress |
+
+---
+
+### Use Cases
+
+- Install local `.rpm` packages
+- Inspect installed packages
+- Verify package contents
+- Troubleshoot package issues
+
+---
+
+### Practical Insight
+
+Similar to `dpkg`, `rpm` does not automatically resolve dependencies.
+
+Example scenario:
+
+$ sudo rpm -ivh app.rpm  
+→ dependency errors occur
+
+To resolve this, higher-level tools like `dnf` or `yum` are typically used.
+
+---
+
+### Important Notes
+
+- Requires administrative privileges
+- Dependency resolution must be handled separately
+- Commonly used in enterprise Linux environments
+
+---
+
+## 6. rpm2cpio command
+
+### Overview
+`rpm2cpio` converts an RPM package into a CPIO archive.  
+This allows extracting files without installing the package.
+
+### Syntax
+rpm2cpio <package.rpm> | cpio -idmv
+
+---
+
+### Examples
+
+#### Extract files from an RPM package
+$ rpm2cpio package.rpm | cpio -idmv
+
+---
+
+### Use Cases
+
+- Inspect package contents without installation
+- Extract specific files from a package
+- Analyze package structure for troubleshooting
+
+---
+
+### Practical Insight
+
+In real environments, `rpm2cpio` is useful when:
+
+- You do not want to install the package
+- You only need a specific file (e.g., configuration or binary)
+
+Example scenario:
+
+1. Download `.rpm` package
+2. Extract contents  
+   → `rpm2cpio package.rpm | cpio -idmv`
+3. Copy only required files
+
+This is especially useful in restricted or minimal environments.
+
+---
+
+## Workflow (RPM-based Troubleshooting)
+
+### Real-world usage flow
+
+1. Inspect package  
+   → `rpm -qi package.rpm`  
+
+2. Check contents  
+   → `rpm -qlp package.rpm`  
+
+3. Attempt installation  
+   → `sudo rpm -ivh package.rpm`  
+
+4. If dependency errors occur  
+   → use `dnf` / `yum`  
+
+5. If installation is not possible  
+   → extract files  
+   → `rpm2cpio package.rpm | cpio -idmv`  
+
+---
+
+## Comparison (Deb vs RPM)
+
+| Category | Debian-based | RPM-based |
+|----------|-------------|----------|
+| Low-level | dpkg | rpm |
+| High-level | apt / apt-get | dnf / yum |
+| Extract package | dpkg-deb | rpm2cpio |
+
+---
+
+## Summary
+
+`rpm` and `rpm2cpio` are essential tools for managing and analyzing packages  
+in RPM-based Linux systems.
+
+Understanding both Debian and RPM ecosystems is important for working  
+in diverse production environments.
+Related: Modern systems use `dnf` instead of `yum` in many environments.
 
 `apt`, `apt-get`, and `apt-cache` are essential tools for package management  
 in Debian-based systems.
