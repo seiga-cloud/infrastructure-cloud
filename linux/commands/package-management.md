@@ -449,3 +449,202 @@ in Debian-based systems.
 
 Understanding when to use each command is critical for efficient system  
 administration and troubleshooting in real-world environments.
+## 7. yum command
+
+### Overview
+`yum` (Yellowdog Updater Modified) is a high-level package manager  
+used in older RPM-based distributions such as CentOS and RHEL.
+
+It handles package installation, updates, and dependency resolution.
+
+### Syntax
+yum [COMMAND] [PACKAGE]
+
+---
+
+### Examples
+
+#### Install a package
+$ sudo yum install nginx
+
+#### Remove a package
+$ sudo yum remove nginx
+
+#### Update all packages
+$ sudo yum update
+
+#### Search for a package
+$ yum search nginx
+
+#### Show package information
+$ yum info nginx
+
+---
+
+### Use Cases
+
+- Manage packages on legacy systems
+- Install software with dependency resolution
+- Maintain system updates
+
+---
+
+### Practical Insight
+
+`yum` is still encountered in older environments.
+
+Example scenario:
+
+- Legacy server (CentOS 7)
+- No `dnf` available
+- Use `yum` for all package operations
+
+---
+
+## 8. dnf command
+
+### Overview
+`dnf` (Dandified YUM) is the modern replacement for `yum`  
+used in newer versions of Fedora, CentOS, and RHEL.
+
+It provides better performance and dependency handling.
+
+### Syntax
+dnf [COMMAND] [PACKAGE]
+
+---
+
+### Examples
+
+#### Install a package
+$ sudo dnf install nginx
+
+#### Remove a package
+$ sudo dnf remove nginx
+
+#### Update system
+$ sudo dnf upgrade
+
+#### Search for a package
+$ dnf search nginx
+
+#### List installed packages
+$ dnf list installed
+
+---
+
+### Use Cases
+
+- Modern RPM-based system management
+- Faster and more reliable package operations
+- Dependency resolution and updates
+
+---
+
+### Practical Insight
+
+In current environments, `dnf` is the standard package manager.
+
+Example:
+
+- RHEL 8 / 9
+- Fedora
+
+`dnf` replaces `yum`, but many systems still provide `yum` as a wrapper.
+
+---
+
+## 9. zypper command
+
+### Overview
+`zypper` is the command-line package manager used in SUSE-based distributions  
+such as openSUSE and SUSE Linux Enterprise.
+
+It supports installation, updates, and repository management.
+
+### Syntax
+zypper [COMMAND] [PACKAGE]
+
+---
+
+### Examples
+
+#### Install a package
+$ sudo zypper install nginx
+
+#### Remove a package
+$ sudo zypper remove nginx
+
+#### Update packages
+$ sudo zypper update
+
+#### Refresh repositories
+$ sudo zypper refresh
+
+#### Search for a package
+$ zypper search nginx
+
+---
+
+### Use Cases
+
+- Manage packages in SUSE environments
+- Control repositories and updates
+- Enterprise Linux operations
+
+---
+
+### Practical Insight
+
+`zypper` is often used in enterprise environments where SUSE is deployed.
+
+A typical workflow:
+
+$ sudo zypper refresh  
+$ sudo zypper install package_name  
+
+Refreshing repositories before installation ensures up-to-date package data.
+
+---
+
+## Workflow (Cross-Distribution Package Management)
+
+### Real-world perspective
+
+Different environments require different tools:
+
+- Debian-based  
+  → `apt`
+
+- Red Hat-based (old)  
+  → `yum`
+
+- Red Hat-based (modern)  
+  → `dnf`
+
+- SUSE-based  
+  → `zypper`
+
+Understanding this allows smooth operation across multiple systems.
+
+---
+
+## Comparison
+
+| Distribution | Tool |
+|-------------|------|
+| Debian / Ubuntu | apt |
+| CentOS 7 | yum |
+| RHEL 8+ / Fedora | dnf |
+| openSUSE / SLES | zypper |
+
+---
+
+## Summary
+
+`yum`, `dnf`, and `zypper` are essential tools for package management  
+across different Linux distributions.
+
+Being able to use these tools appropriately depending on the environment  
+is a key skill for system administrators and engineers.
+Note: Some systems provide `yum` as a symbolic link to `dnf` for compatibility.
