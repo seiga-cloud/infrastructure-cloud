@@ -282,3 +282,192 @@ and debugging shell behavior.
 
 Understanding how variables are set, inherited, and modified  
 is critical for scripting and system administration in real-world environments.
+## 7. Quoting (Shell Quotes)
+
+### Overview
+Quoting in the shell controls how special characters and variables are interpreted.
+
+It is essential for handling strings, variables, and command execution correctly.
+
+---
+
+### Types of Quotes
+
+#### 1. Single Quotes (' ')
+
+### Description
+Single quotes preserve the literal value of all characters inside them.  
+Variables and commands are not expanded.
+
+### Example
+
+$ echo '$HOME'  
+→ $HOME
+
+---
+
+### Use Cases
+
+- Prevent variable expansion
+- Handle strings with special characters
+
+---
+
+### Practical Insight
+
+Used when you want exact text output:
+
+$ echo 'Path is $PATH'  
+→ Path is $PATH
+
+---
+
+#### 2. Double Quotes (" ")
+
+### Description
+Double quotes allow variable and command expansion,  
+but preserve spaces and most special characters.
+
+### Example
+
+$ echo "$HOME"  
+→ /home/user
+
+---
+
+### Use Cases
+
+- Use variables safely
+- Handle strings with spaces
+
+---
+
+### Practical Insight
+
+Without quotes:
+
+$ echo $VAR  
+→ may break if spaces exist
+
+With quotes:
+
+$ echo "$VAR"  
+→ safe output
+
+---
+
+#### 3. Backticks (` `) and Command Substitution
+
+### Description
+Backticks or `$()` execute a command and return its output.
+
+### Examples
+
+$ echo `date`  
+$ echo $(date)
+
+---
+
+### Use Cases
+
+- Capture command output
+- Use command results in scripts
+
+---
+
+### Practical Insight
+
+`$()` is preferred over backticks because it is more readable and nestable:
+
+$ echo $(echo $(date))
+
+---
+
+#### 4. Escape Character (\)
+
+### Description
+The backslash `\` escapes special characters.
+
+### Example
+
+$ echo \$HOME  
+→ $HOME
+
+---
+
+### Use Cases
+
+- Prevent interpretation of special characters
+- Handle symbols like `$`, `"`, `'`
+
+---
+
+### Practical Insight
+
+Useful when mixing quotes:
+
+$ echo "This is a \"quoted\" word"
+
+---
+
+## Workflow (Real-world Usage)
+
+### Common scenarios
+
+1. Output literal text  
+   → `' '`  
+
+2. Use variables safely  
+   → `" "`  
+
+3. Execute command inside string  
+   → `$()`  
+
+4. Escape special characters  
+   → `\`  
+
+---
+
+## Common Pitfalls
+
+### 1. Unquoted variables
+
+$ FILE="my file.txt"  
+$ cat $FILE   → error  
+
+Fix:
+
+$ cat "$FILE"
+
+---
+
+### 2. Unexpected expansion
+
+$ echo *  
+→ expands to all files  
+
+Fix:
+
+$ echo "*"
+
+---
+
+### 3. Mixing quotes incorrectly
+
+$ echo "It's broken"   ← OK  
+$ echo 'It's broken'   ← error  
+
+Fix:
+
+$ echo "It's broken"
+
+---
+
+## Summary
+
+Quoting is fundamental to shell usage.
+
+Understanding how single quotes, double quotes, command substitution,  
+and escape characters work is essential for writing reliable scripts  
+and avoiding unexpected behavior in real-world environments.
+Note: Improper quoting is one of the most common causes of bugs in shell scripts.
