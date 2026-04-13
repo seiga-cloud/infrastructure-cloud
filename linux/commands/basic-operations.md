@@ -314,3 +314,202 @@ ls -l
 - Combine with `mv`, `cp`
 - Use in shell scripts
 - Apply in AWS EC2 setup
+
+# Linux Command: rm
+
+## Topic: File and Directory Removal – rm
+
+---
+
+## Overview
+The `rm` command is used to remove (delete) files and directories in Linux.
+It is a powerful and potentially dangerous command, widely used in system administration and cloud environments.
+
+---
+
+## Purpose
+Delete files or directories.
+
+---
+
+## Syntax
+```bash
+rm [OPTION] FILE
+```
+
+---
+
+## Common Options
+
+| Option | Description |
+|--------|-------------|
+| -r     | Remove directories recursively |
+| -f     | Force deletion without prompt |
+| -i     | Prompt before deletion |
+| -v     | Show detailed output |
+
+---
+
+## Examples
+
+```bash
+# Delete a file
+rm file1.txt
+
+# Delete multiple files
+rm file1.txt file2.txt
+
+# Delete directory recursively
+rm -r dir1/
+
+# Force delete without confirmation
+rm -f file1.txt
+
+# Confirm before deleting
+rm -i file1.txt
+
+# Show detailed output
+rm -v file1.txt
+```
+
+---
+
+## Use Cases
+
+- Remove unnecessary files
+- Clean up logs and temporary files
+- Delete old backups
+- Maintain disk space on servers
+
+---
+
+## Practical Workflow (LPIC + Cloud)
+
+```bash
+# Remove temporary files
+rm -i temp.txt
+
+# Remove old backup directory
+rm -r backup_old/
+
+# Verify deletion
+ls -l
+```
+
+---
+
+## Practical Insight
+
+- `rm -r` is required to delete directories
+- `rm -f` should be used carefully (no confirmation)
+- Always verify files before deletion
+- Commonly used in automation and maintenance scripts
+
+---
+
+## Warning
+
+- Deleted files cannot be easily recovered
+- Avoid using `rm -rf /` or similar destructive commands
+- Always double-check paths before execution
+
+---
+
+## Next Steps
+
+- Learn `rmdir`, `chmod`, `chown`
+- Practice safe deletion on AWS EC2
+
+- # Linux Command: rmdir
+
+## Topic: Empty Directory Removal – rmdir
+
+---
+
+## Overview
+The `rmdir` command is used to remove empty directories in Linux.
+It is safer than `rm -r` because it only deletes directories that contain no files.
+
+---
+
+## Purpose
+Delete empty directories only.
+
+---
+
+## Syntax
+```bash
+rmdir [OPTION] DIRECTORY
+```
+
+---
+
+## Common Options
+
+| Option | Description |
+|--------|-------------|
+| -v     | Show detailed output |
+| -p     | Remove directory and its parent if empty |
+
+---
+
+## Examples
+
+```bash
+# Remove an empty directory
+rmdir dir1
+
+# Remove nested empty directories
+rmdir -p project/app
+
+# Show detailed output
+rmdir -v dir1
+```
+
+---
+
+## Use Cases
+
+- Clean up empty directories
+- Maintain clean project structures
+- Safe directory removal
+
+---
+
+## Practical Workflow (LPIC + Cloud)
+
+```bash
+# Create test directory
+mkdir testdir
+
+# Remove empty directory
+rmdir testdir
+
+# Verify
+ls -l
+```
+
+---
+
+## Practical Insight
+
+- `rmdir` only works on empty directories
+- Safer alternative to `rm -r`
+- Useful in scripts where accidental deletion must be avoided
+
+---
+
+## Difference from rm
+
+| Command | Behavior |
+|--------|----------|
+| rm -r  | Deletes directories with contents |
+| rmdir  | Deletes empty directories only |
+
+---
+
+## Next Steps
+
+- Combine with `rm`, `mkdir`
+- Use in automation scripts
+- Apply in AWS EC2 environments
