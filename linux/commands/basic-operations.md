@@ -513,3 +513,201 @@ ls -l
 - Combine with `rm`, `mkdir`
 - Use in automation scripts
 - Apply in AWS EC2 environments
+
+# File and Directory Management Commands
+
+This document covers commands used for creating and inspecting files in Linux systems.
+
+---
+
+## 1. touch command
+
+### Overview
+
+`touch` is a command used to create empty files or update timestamps of existing files.
+
+It is commonly used when setting up project structures or initializing files.
+
+### Syntax
+
+touch [OPTION] <file>
+
+---
+
+### Examples
+
+#### Create a single file
+
+$ touch README.md
+
+#### Create multiple files
+
+$ touch app.py config.yaml Dockerfile
+
+#### Create files in directories
+
+$ touch docs/architecture.md scripts/deploy.sh
+
+#### Update timestamp of a file
+
+$ touch existing_file.txt
+
+---
+
+### Options
+
+| Option | Description                             |
+| ------ | --------------------------------------- |
+| -c     | Do not create file if it does not exist |
+| -a     | Change access time only                 |
+| -m     | Change modification time only           |
+| -t     | Set specific timestamp                  |
+
+---
+
+### Use Cases
+
+* Initialize project structure
+* Create placeholder files
+* Prepare configuration files
+* Update file timestamps
+
+---
+
+### Practical Insight
+
+In real-world development, `touch` is frequently used to quickly scaffold a project.
+
+Example scenario:
+
+$ mkdir project && cd project
+$ touch README.md .gitignore docker-compose.yml
+
+→ Creates the base structure for a repository
+
+---
+
+### Workflow (Project Initialization)
+
+1. Create project directory
+   → `mkdir project && cd project`
+
+2. Create base files
+   → `touch README.md .gitignore`
+
+3. Create subdirectories
+   → `mkdir app docs scripts`
+
+4. Create files inside directories
+   → `touch app/main.py docs/setup.md scripts/deploy.sh`
+
+---
+
+### Important Notes
+
+* Does not add content to files
+* Will overwrite timestamps if file exists
+* Useful for automation and scripting
+
+---
+
+### Summary
+
+`touch` is a simple but powerful command for creating and managing files.
+It is essential for initializing project structures in development environments.
+
+---
+
+## 2. file command
+
+### Overview
+
+`file` is a command used to determine the type of a file.
+
+It analyzes file content rather than relying on file extensions.
+
+### Syntax
+
+file [OPTION] <file>
+
+---
+
+### Examples
+
+#### Check file type
+
+$ file README.md
+
+#### Check multiple files
+
+$ file *
+
+#### Check files in a directory
+
+$ file app/*
+
+#### Recursive check
+
+$ file -r .
+
+---
+
+### Options
+
+| Option | Description                  |
+| ------ | ---------------------------- |
+| -i     | Show MIME type               |
+| -r     | Recursive check              |
+| -b     | Brief output (omit filename) |
+
+---
+
+### Use Cases
+
+* Identify file types
+* Verify scripts and binaries
+* Troubleshoot unknown files
+* Validate environment setup
+
+---
+
+### Practical Insight
+
+In real environments, `file` is useful for verifying what a file actually is.
+
+Example scenario:
+
+$ file deploy.sh
+→ Bourne-Again shell script
+
+$ file main.py
+→ Python script
+
+This helps confirm that files are correctly recognized by the system.
+
+---
+
+### Workflow (File Verification)
+
+1. Create files
+   → `touch script.sh app.py`
+
+2. Verify file types
+   → `file script.sh app.py`
+
+3. Confirm environment readiness
+
+---
+
+### Important Notes
+
+* Does not depend on file extension
+* Useful in debugging and system inspection
+* Helps detect misconfigured files
+
+---
+
+### Summary
+
+`file` is a fundamental command for inspecting file types in Linux systems.
+It plays an important role in debugging, validation, and system analysis.
